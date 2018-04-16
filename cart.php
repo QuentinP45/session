@@ -7,20 +7,14 @@ if(!isset($_SESSION['loginname'])) {
     ?>
     <section class="cookies container-fluid">
         <div class="row">
-       <?php /* NE PAS EFFACER (début) */
-
+       <?php
        if (!isset($_SESSION['cart'])) {
-           //si je n'ai pas de session panier
            $_SESSION['cart'] = [];
        }
        if (isset($_POST['submit'])) {
-           // si j'ai un submit
-
                $_SESSION['cart'][] = $_POST;
        }
-
        foreach ($_SESSION['cart'] as $info) { ?>
-
            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
             <figure class="thumbnail text-center">
                 <img src="<?php if (isset($info['cookImage'])) { echo $info['cookImage'];}?>" alt="<?php if (isset($info['cookAltImage'])) { echo $info['cookAltImage'];}?>" class="img-responsive">
@@ -33,13 +27,18 @@ if(!isset($_SESSION['loginname'])) {
 
             <?php
        }
-
-
-
-
-
-       /* NE PAS EFFACER (fin) */ ?>
+       ?>
         </div>
+        <?php
+        if (isset($_SESSION['loginname'])) { ?>
+            <div>
+                <form method="POST" action="login.php">
+                    <button type="submit" class="btn btn-warning btn-lg btn-block" name="disconnect">Déconnexion</button>
+                </form>
+            </div>
+            <?php
+        }
+        ?>
     </section>
     <?php
     require 'inc/foot.php';

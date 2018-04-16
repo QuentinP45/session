@@ -1,8 +1,5 @@
 <?php
 session_start();
-if (!isset($_SESSION['loginname'])) {
-    header('Location: login.php');
-} else {
 require 'inc/head.php';?>
 <section class="cookies container-fluid" xmlns="http://www.w3.org/1999/html">
   <div class="row">
@@ -75,13 +72,16 @@ require 'inc/head.php';?>
       </figure>
     </div>
   </div>
-  <div>
-    <form method="POST" action="login.php">
-        <button type="submit" class="btn btn-warning btn-lg btn-block" name="disconnect">Déconnexion</button>
-    </form>
-  </div>
+    <?php
+    if (isset($_SESSION['loginname'])) { ?>
+        <div>
+            <form method="POST" action="login.php">
+                <button type="submit" class="btn btn-warning btn-lg btn-block" name="disconnect">Déconnexion</button>
+            </form>
+        </div>
+        <?php
+    }
+    ?>
 </section>
-<?php require 'inc/foot.php';
-}
-?>
+<?php require 'inc/foot.php'; ?>
 
